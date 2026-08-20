@@ -23,6 +23,7 @@ app.use(
       "http://localhost:3000",
       "https://asemstore99.firebaseapp.com",
       "https://asemstore99.web.app",
+      "https://e-commerce-store-1-dgoc.onrender.com", // production frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
