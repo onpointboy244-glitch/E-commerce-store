@@ -1,0 +1,9 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0px;
+  background-color: #f4f5f7; /* خلفية رمادية فاتحة جداً لإبراز الكروت البيضاء */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

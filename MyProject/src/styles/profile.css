@@ -1,0 +1,191 @@
+/* --- Modern User Profile Styles --- */
+.user-profile-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 140px;
+  width: fit-content; /* لضمان أن الحاوية لا تتمدد أكثر من اللازم */
+  cursor: pointer;
+  position: relative;
+  background: white;
+  height: 48px;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.user-profile-container.is-logged-in {
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+}
+
+.user-profile-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(216, 36, 5, 0.25);
+  border-color: #d82405;
+  background-color: #fff;
+}
+
+.user-profile-container:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #d82405, #ff5f40);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(216, 36, 5, 0.3);
+}
+
+.user-profile-container:hover .user-avatar {
+  transform: rotate(360deg);
+  background: linear-gradient(135deg, #1a1a1a, #444);
+}
+
+.user-profile-container .dropdown-menu {
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  margin-top: 8px; /* مسافة بين زر البروفايل والقائمة */
+  right: 0 !important;
+  left: auto !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.dropdown-info-item {
+  transition: background 0.2s ease;
+  border-radius: 12px;
+  margin: 0 4px;
+}
+
+.dropdown-info-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-info-item i {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff5f5;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+#open-edit-profile {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+#open-edit-profile:hover {
+  transform: translateY(-5px) scale(1.05);
+  background-color: #d82405 !important;
+  border-color: #d82405 !important;
+  box-shadow: 0 10px 20px rgba(216, 36, 5, 0.3) !important;
+}
+
+#open-edit-profile:hover i {
+  color: white !important;
+  animation: pulseIcon 1s ease-in-out infinite;
+}
+
+@keyframes pulseIcon {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.logout-btn:hover {
+  background: #d82405;
+}
+
+/* --- تنسيقات الـ (بوب اب) لتظهر في منتصف الشاشة --- */
+#edit-profile-modal {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.5) !important; /* خلفية داكنة شفافة */
+  display: flex !important;
+  align-items: center; /* توسيط عمودي */
+  justify-content: center; /* توسيط أفقي */
+  z-index: 9999 !important; /* التأكد من ظهورها فوق كل العناصر */
+  backdrop-filter: blur(4px); /* تأثير ضبابي للخلفية */
+}
+
+#edit-profile-modal .modal-dialog {
+  margin: 0;
+  width: 100%;
+  max-width: 500px; /* العرض الأقصى للنافذة */
+}
+
+/* --- Edit Profile Modal Styles --- */
+.edit-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.edit-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.edit-input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+}
+
+.edit-input-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.edit-input-group input:focus {
+  border-color: #d82405;
+}
+
+.edit-icon-btn:hover {
+  color: #d82405;
+}
+
+.error-msg {
+  color: #d82405;
+  font-size: 11px;
+  margin-top: 2px;
+  display: none;
+}

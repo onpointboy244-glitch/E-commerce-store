@@ -1,0 +1,23 @@
+{
+  "name": "asem-store-server",
+  "version": "1.0.0",
+  "description": "Secure backend server for Asem Store - food & sweets shop",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "disposable-email-domains": "^1.0.62",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.5.0",
+    "firebase-admin": "^13.0.0",
+    "helmet": "^8.0.0",
+    "isemail": "^3.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}

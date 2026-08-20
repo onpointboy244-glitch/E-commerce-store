@@ -1,0 +1,332 @@
+/* حركة ظهور المنتجات بشكل عصري */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* التنسيق الجديد للكارد */
+.product {
+  background: white;
+  border: none !important;
+  border-radius: 20px !important;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.product:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+}
+
+.offer-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background: linear-gradient(135deg, #ff3b30, #d82405);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(216, 36, 5, 0.4);
+  letter-spacing: -0.5px;
+}
+
+.offer-badge-modal {
+  top: 20px;
+  left: 20px;
+  font-size: 1rem;
+  padding: 8px 18px;
+}
+
+.product img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product:hover img {
+  transform: scale(1.1);
+}
+
+.product-info-body {
+  padding: 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2d2e32;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1; /* standard property for compatibility */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.added-success {
+  background-color: #0a8f27 !important;
+  color: white !important;
+  border: 1px solid #0a8f27;
+  box-shadow: 0 0 10px rgba(10, 143, 39, 0.4);
+  transform: scale(1.05); /* تكبير بسيط جداً ليعطي شعور بالتفاعل */
+  pointer-events: none; /* منع الضغط المتكرر أثناء عرض الرسالة */
+}
+.added-success {
+  transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.info-icon-wrapper {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.info-icon-wrapper:hover {
+  transform: scale(1.1);
+  background-color: #d82405;
+}
+.info-icon-wrapper:hover .info-icon {
+  color: white;
+}
+
+.info-icon {
+  color: #d82405;
+  font-size: 1.1rem; /* حجم مناسب لأيقونة بوتستراب */
+  line-height: 0;
+  display: flex;
+  pointer-events: none; /* عشان النقرة تروح للـ wrapper دائماً */
+}
+
+/* --- Product Modal Styles --- */
+.product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.product-modal-card {
+  background: white;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  animation: modalSlideUp 0.4s ease-out;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: #f4f5f7;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: #e2e4e8;
+  color: #d82405;
+}
+
+.modal-body-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.modal-image-section {
+  flex: 1;
+  min-width: 300px;
+  background: #f9f9f9;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-image-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.modal-info-section {
+  flex: 1.2;
+  padding: 40px;
+  min-width: 300px;
+}
+
+.modal-product-title {
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+.modal-product-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff3b30; /* لون أحمر عصري ومشرق */
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+.modal-divider {
+  width: 50px;
+  height: 4px;
+  background: #d82405;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+.modal-product-description {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+.modal-extra-details {
+  background: #f8f9fa;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border-right: 4px solid #d82405; /* خط جانبي لتمييز القسم */
+  direction: rtl; /* لضمان ظهور النص العربي بشكل صحيح من اليمين */
+}
+.detail-item {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .product-modal-card {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-body-content {
+    flex-direction: column;
+  }
+  .modal-image-section {
+    padding: 20px;
+  }
+  .modal-info-section {
+    padding: 30px 20px;
+  }
+
+  /* أزرار الكمية مع تأثير الهوفر الموحد */
+  .qty-pill-btn {
+    transition: all 0.2s ease-in-out !important;
+  }
+  .qty-pill-btn:hover:not(:disabled) {
+    background-color: #d82405 !important;
+  }
+  .qty-pill-btn:hover:not(:disabled) i {
+    color: white !important;
+  }
+}
+
+/* --- تحسينات الموبايل: نظام العمودين العصري --- */
+@media (max-width: 576px) {
+  /* إجبار المنتجات على الظهور في عمودين حتى لو كانت الكلاسات col-12 */
+  .products-countaier {
+    margin-left: -6px !important;
+    margin-right: -6px !important;
+  }
+
+  .products-countaier > * {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    padding: 6px !important; /* مسافات ضيقة وجميلة بين الكاردات */
+  }
+
+  .product {
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    background-color: #fff;
+  }
+
+  .product-image-container {
+    height: 130px; /* ارتفاع مثالي للصور في وضع العمودين */
+    border-radius: 16px 16px 0 0;
+  }
+
+  .product-info-body {
+    padding: 10px; /* تقليل الحشو ليتناسب مع حجم الكارد الأصغر */
+  }
+
+  .product-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    -webkit-line-clamp: 2; /* إظهار سطرين للاسم لضمان الوضوح */
+    line-clamp: 2;
+  }
+
+  .info-icon-wrapper {
+    width: 26px;
+    height: 26px;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}

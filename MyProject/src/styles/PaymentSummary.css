@@ -1,0 +1,121 @@
+.price-card-sticky {
+  height: fit-content !important;
+  align-self: flex-start;
+  width: 100%;
+  border-radius: 24px !important;
+  background: #ffffff !important;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.04),
+    0 20px 60px rgba(0, 0, 0, 0.02) !important;
+  transition: transform 0.3s ease;
+}
+.price-card-sticky:hover {
+  transform: translateY(-2px);
+}
+
+.summary-title {
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+  color: #1a1a1a;
+  position: relative;
+  padding-bottom: 10px;
+}
+.price-row {
+  border: none !important;
+  margin-bottom: 8px;
+  /* تقليل الحواف الداخلية لضمان قصر طول الكارد */
+  padding: 6px 12px !important;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.price-row:hover {
+  background: #f8f9fa;
+}
+
+.total-section {
+  background: #fff5f5;
+  margin: 15px -15px 20px -15px;
+  /* جعل منطقة السعر الإجمالي أكثر رشاقة */
+  padding: 15px 20px;
+  border-top: 1px dashed rgba(216, 36, 5, 0.2);
+  border-bottom: 1px dashed rgba(216, 36, 5, 0.2);
+}
+
+.total-label {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.second {
+  display: inline-block;
+  white-space: nowrap;
+  animation: priceGlow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.total-price {
+  color: #bd2121;
+}
+.place-order-btn {
+  background: linear-gradient(135deg, #d82405 0%, #a51b04 100%) !important;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(216, 36, 5, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.place-order-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(216, 36, 5, 0.4) !important;
+}
+
+/* Sign-in button variant — always looks clickable */
+.btn-signin {
+  background: linear-gradient(135deg, #d82405 0%, #a51b04 100%) !important;
+  border: none !important;
+  box-shadow:
+    0 8px 20px rgba(216, 36, 5, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+.btn-signin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(216, 36, 5, 0.4) !important;
+}
+@keyframes priceGlow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+    color: #0a8f27;
+    text-shadow: 0 0 15px rgba(10, 143, 39, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+}
+
+/* حجز مساحة البادج حتى لو كان مخفياً لضمان ثبات ارتفاع الكارد */
+.shipping-discount-badge {
+  display: flex !important;
+  visibility: hidden; /* يحجز مساحة في الصفحة ولكنه غير مرئي */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border: 1px solid transparent !important; /* نستخدم حدود شفافة بدل إخفائها تماماً لمنع قفزة الـ 1px */
+}
+
+.shipping-discount-badge.visible {
+  visibility: visible;
+  opacity: 1;
+  animation: badgePop 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes badgePop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

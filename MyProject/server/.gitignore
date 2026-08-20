@@ -1,0 +1,12 @@
+# Service account key — NEVER commit this!
+serviceAccountKey.json
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log

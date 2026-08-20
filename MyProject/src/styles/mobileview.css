@@ -1,0 +1,126 @@
+.mobile-bottom-nav {
+  display: none; /* مخفي في الشاشات الكبيرة */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background-color: white;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  z-index: 2000;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-bottom-nav .nav-item {
+  text-decoration: none;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  font-size: 11px;
+  font-weight: 600;
+  position: relative;
+  flex: 1;
+}
+
+.mobile-bottom-nav .nav-item i {
+  font-size: 22px;
+  margin-bottom: 2px;
+  transition: 0.3s;
+}
+
+/* حل مشكلة اختفاء أيقونة السلة في الموبايل */
+.mobile-bottom-nav .nav-item .cart-icon {
+  color: inherit;
+}
+
+.mobile-bottom-nav .nav-item.active,
+.mobile-bottom-nav .nav-item:hover {
+  color: #d82405;
+}
+
+/* تنسيق الموبايل */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex; /* إظهار الناف بار السفلي */
+  }
+
+  .navbar .container-fluid {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    gap: 5px !important;
+  }
+
+  /* إخفاء السلة والطلبات من الهيدر العلوي لتوفير مساحة */
+  .cart-container,
+  .returns-container {
+    display: none !important;
+  }
+
+  /* إضافة مساحة أسفل الصفحة عشان المحتوى ما يختفي وراء القائمة */
+  body {
+    padding-bottom: 80px;
+  }
+
+  /* تصغير اللوجو */
+  .headerimg {
+    width: 35px !important;
+    margin-left: 0 !important;
+  }
+
+  /* جعل السيرش يتناسب مع السطر الواحد */
+  .search-wrapper {
+    flex: 1 1 auto !important; /* السماح له بالنمو وتعبئة الفراغ */
+    margin: 0 0 0 -27px !important; /* إزاحة السيرش لليسار قليلاً عن طريق مارجن سالب */
+    max-width: 500px !important; /* إلغاء أي حد للعرض موروث من ملفات أخرى */
+    min-width: 0 !important;
+    position: relative !important;
+  }
+
+  .inputClass {
+    height: 45px !important; /* تقليل ارتفاع السيرش */
+    padding: 0 10px 0 35px !important;
+    font-size: 14px !important;
+  }
+
+  /* تصغير حاويات الإشعارات والبروفايل لترك مساحة للسيرش */
+  .notification-container,
+  .user-container,
+  .user-profile-container {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    min-width: unset !important;
+    padding: 0 5px !important;
+    justify-content: center !important;
+  }
+
+  .all {
+    gap: 8px !important; /* تقليل المسافة لضمان تناسق العناصر ومنع تمدد الهيدر */
+  }
+
+  .notification-dropdown {
+    right: -30px !important; /* إزاحة القائمة لليمين (نحو المركز) لتصحيح الاختفاء من اليسار */
+    width: 280px !important; /* تقليل العرض قليلاً ليناسب شاشات الموبايل */
+  }
+
+  .notification-dropdown::before {
+    right: 49px !important; /* موازنة مكان المثلث ليبقى تحت أيقونة الجرس (22px + 80px) */
+  }
+}
+@media (max-width: 568px) {
+  .search-wrapper {
+    flex: 1 1 auto !important; /* السماح له بالنمو وتعبئة الفراغ */
+    margin: 0 0 0 -27px !important; /* إزاحة السيرش لليسار قليلاً عن طريق مارجن سالب */
+    max-width: 300px !important; /* إلغاء أي حد للعرض موروث من ملفات أخرى */
+    min-width: 0 !important;
+    position: relative !important;
+  }
+}

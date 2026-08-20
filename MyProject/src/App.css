@@ -1,0 +1,14 @@
+/* ── Admin Sidebar ──────────────────────────────────────────── */
+.admin-sidebar-link {
+  border-left: 3px solid transparent;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.admin-sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+}
+
+.admin-sidebar-link.active {
+  border-left-color: var(--bs-primary);
+}

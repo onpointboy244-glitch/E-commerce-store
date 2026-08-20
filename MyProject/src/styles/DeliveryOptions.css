@@ -1,0 +1,94 @@
+/* ── Delivery Option Cards ────────────────────────── */
+
+.delivery-options-list {
+  max-width: 100%;
+}
+
+.delivery-option-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  margin-bottom: 3px;
+  border-radius: 8px;
+  border: 1px solid #eef0f2;
+  background: #fff;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.delivery-option-card:hover {
+  background: #f8f9fa;
+  border-color: #e0e2e5;
+}
+
+.delivery-option-card.active {
+  border-color: #d82405;
+  background: rgba(216, 36, 5, 0.03);
+}
+
+/* Icon circle */
+.delivery-option-card .option-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #f0f2f4;
+  font-size: 0.7rem;
+  color: #666;
+  transition: all 0.15s ease;
+}
+
+.delivery-option-card.active .option-icon {
+  background: rgba(216, 36, 5, 0.1);
+  color: #d82405;
+}
+
+/* Radio input */
+.delivery-option-card .form-check-input {
+  margin: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-color: #ccc;
+}
+
+.delivery-option-card .form-check-input:checked {
+  background-color: #d82405;
+  border-color: #d82405;
+}
+
+/* Label content */
+.delivery-option-card .form-check-label {
+  cursor: pointer;
+  pointer-events: none;
+  flex: 1;
+}
+
+/* Days badge */
+.delivery-option-card .days-hover-badge {
+  position: absolute;
+  top: -7px;
+  right: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 0.55rem;
+  padding: 1px 7px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.delivery-option-card:hover .days-hover-badge,
+.delivery-option-card.active .days-hover-badge {
+  opacity: 1;
+}
+

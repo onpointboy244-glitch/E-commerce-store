@@ -1,0 +1,15 @@
+.shipping-address-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.shipping-address-card .form-control-sm {
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+.shipping-address-card .address-display {
+  font-size: 0.82rem;
+  line-height: 1.5;
+}

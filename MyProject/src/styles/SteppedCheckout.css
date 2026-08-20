@@ -1,0 +1,348 @@
+/* ── Stepped Checkout Layout ───────────────────────────── */
+
+/* Step Indicator */
+.stepped-checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  padding: 1.5rem 1rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  flex-shrink: 0;
+}
+
+.step-circle.inactive {
+  background: #e9ecef;
+  color: #888;
+  border: 2px solid transparent;
+}
+
+.step-circle.active {
+  background: #d82405;
+  color: white;
+  border: 2px solid #d82405;
+  box-shadow: 0 4px 12px rgba(216, 36, 5, 0.3);
+  transform: scale(1.05);
+}
+
+.step-circle.completed {
+  background: #0a8f27;
+  color: white;
+  border: 2px solid #0a8f27;
+}
+
+.step-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.step-label .step-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.step-label .step-subtitle {
+  font-size: 0.7rem;
+  color: #999;
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .step-label .step-subtitle {
+    display: block;
+  }
+}
+
+.step-connector {
+  width: 60px;
+  height: 2px;
+  background: #e9ecef;
+  margin: 0 12px;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.4s ease;
+}
+
+.step-connector.completed {
+  background: #0a8f27;
+}
+
+/* Step content — direction-aware transitions */
+.step-content {
+  position: relative;
+}
+
+.step-content-inner {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation-fill-mode: both;
+}
+
+.step-content-inner.forward {
+  animation-name: stepSlideInRight;
+}
+
+.step-content-inner.backward {
+  animation-name: stepSlideInLeft;
+}
+
+@keyframes stepSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes stepSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Step Navigation Buttons */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.btn-step-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-step-back:hover {
+  border-color: #d82405;
+  color: #d82405;
+  background: rgba(216, 36, 5, 0.04);
+}
+
+.btn-step-next {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: #d82405;
+  color: white;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(216, 36, 5, 0.2);
+  cursor: pointer;
+}
+
+.btn-step-next:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(216, 36, 5, 0.3);
+}
+
+.btn-step-next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Step-specific */
+.step-place-order-wrapper {
+  margin-top: 1rem;
+}
+
+/* ── Step 2: Stacked layout (Address first, then Delivery) ── */
+
+/* Delivery section wrapper */
+.step2-delivery-section {
+  margin-top: 0;
+}
+
+/* Grid of item + delivery cards — 2 columns */
+.step2-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 767.98px) {
+  .step2-items-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Item + delivery card */
+.step2-item-card {
+  background: #fff;
+  border: 1px solid #eef0f2;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.step2-item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f2f4;
+}
+
+.step2-item-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.step2-item-info {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.step2-item-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.step2-item-price {
+  font-size: 0.72rem;
+  color: #888;
+}
+
+.step2-item-qty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(216, 36, 5, 0.06);
+  min-width: 26px;
+  height: 26px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #d82405;
+  flex-shrink: 0;
+  padding: 0 8px;
+}
+
+.step2-item-delivery .delivery-options-list {
+  max-width: 100%;
+}
+
+.step2-item-delivery .delivery-option-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Address card — full width now */
+.step2-address-card {
+  background: #fff;
+  border: 1px solid #eef0f2;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+/* ── Quantity pill hover ────────────────────────────── */
+.qty-pill-btn {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.qty-pill-btn:hover:not(:disabled) {
+  background-color: rgba(216, 36, 5, 0.12);
+}
+.qty-pill-btn:hover:not(:disabled) i {
+  color: #d82405 !important;
+}
+.qty-pill-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Make completed step circles clickable */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ── Keep Shopping button ───────────────────────────── */
+.btn-keep-shopping {
+  font-size: 0.8rem;
+  color: #d82405;
+  background-color: rgba(216, 36, 5, 0.06);
+  border: 1px solid rgba(216, 36, 5, 0.15);
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+.btn-keep-shopping:hover {
+  background-color: rgba(216, 36, 5, 0.12) !important;
+}
+
+/* ── Delete item button ─────────────────────────────── */
+.btn-delete-item {
+  color: #d82405;
+  background-color: rgba(216, 36, 5, 0.06);
+  border-radius: 8px;
+  padding: 4px 10px;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+}
+.btn-delete-item:hover {
+  background-color: rgba(216, 36, 5, 0.15) !important;
+}

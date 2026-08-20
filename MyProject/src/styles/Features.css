@@ -1,0 +1,38 @@
+.features-section {
+  background-color: #ffffff;
+}
+
+.feature-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  background: white;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  border-color: rgba(216, 36, 5, 0.1);
+}
+
+.feature-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  color: #d82405;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-wrapper {
+  background-color: #d82405;
+  color: white;
+}

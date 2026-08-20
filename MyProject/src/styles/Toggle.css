@@ -1,0 +1,95 @@
+/* Category Bar Modern Styles */
+.category-container {
+  position: sticky;
+  top: 85px; /* تم تقليلها لتلتصق بأسفل الهيدر مباشرة (تأكد من مطابقتها لارتفاع Navbar عندك) */
+  z-index: 11; /* أقل من z-index الخاص بالهيدر (1030) ليظهر وكأنه يخرج من تحته */
+  background: transparent;
+  padding: 0;
+  margin-top: -1px; /* لضمان عدم وجود فجوة بيضاء بين الهيدر والكاتيجوري */
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.category-simple-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.6); /* خلفية بيضاء شفافة */
+  backdrop-filter: blur(12px); /* تأثير الزجاج الضبابي العصري */
+  -webkit-backdrop-filter: blur(12px); /* دعم متصفحات Safari */
+  padding: 10px 30px;
+  /* جعل الحواف الدائرية من الأسفل فقط ليعطي شكل اللسان النازل */
+  border-radius: 0 0 25px 25px;
+  pointer-events: auto;
+  /* تقليل الظل وجعله يبدو وكأنه ظل ناتج عن الهيدر نفسه */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-top: none; /* إزالة الحدود العلوية ليبدو متصلاً بما فوقه */
+}
+
+.category-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-item-text {
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #2d2e32;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-item-text:hover,
+.nav-item-text.active {
+  color: #d82405;
+}
+
+.nav-item-text.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #d82405;
+}
+.nav-separator {
+  color: #ccc;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin: 0 5px;
+}
+
+/* Mobile adjustments for the category bar */
+@media (max-width: 768px) {
+  .category-container {
+    /*
+     * قم بتعديل هذه القيمة (45px) لتتناسب تماماً مع ارتفاع الهيدر الخاص بك في وضع الموبايل.
+     * عادةً ما يكون ارتفاع الهيدر في الموبايل أقل من الديسكتوب.
+     */
+    top: 55px;
+  }
+
+  .category-simple-nav {
+    padding: 8px 20px; /* تقليل الـ padding لجعل اللسان أكثر إحكاماً */
+    border-radius: 0 0 20px 20px; /* حواف دائرية أصغر قليلاً */
+  }
+
+  .category-label {
+    font-size: 0.7rem; /* تصغير حجم الخط للـ label */
+  }
+
+  .nav-item-text {
+    font-size: 0.9rem; /* تصغير حجم الخط لأسماء التصنيفات */
+  }
+
+  .nav-separator {
+    font-size: 0.9rem; /* تصغير حجم الخط للفاصل */
+    margin: 0 3px; /* تقليل المسافة حول الفاصل */
+  }
+}
