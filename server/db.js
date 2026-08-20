@@ -10,25 +10,27 @@ const __dirname = dirname(__filename);
 
 // ─── Load Firebase Service Account ──────────────────────────────────────────
 // Local dev: serviceAccountKey.json file in this folder.
-// Production (Render etc.): FIREBASE_SERVICE_ACCOUNT env var containing the
-// full JSON (newlines of private_key must be escaped as \n).
+// Production (Render etc.): either
+//   - FIREBASE_SERVICE_ACCOUNT env var with the full JSON (private_key \n's
+//     escaped), or
+//   - a Secret File mounted at /etc/secrets/serviceAccountKey.json (Render)
+//     — byte-for-byte copy of the file, nothing gets mangled in transit.
 let serviceAccount;
 
-if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-} else {
-  const serviceAccountPath = join(__dirname, "serviceAccountKey.json");
+const tryReadFile = (p) =>
+  existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null;
 
-  if (!existsSync(serviceAccountPath)) {
-    console.error("❌ ERROR: No Firebase credentials found!");
-    console.error(
-      "   Set FIREBASE_SERVICE_ACCOUNT env var (production) or place"
-    );
-    console.error("   serviceAccountKey.json in: " + __dirname);
-    process.exit(1);
-  }
+serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT
+  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+  : tryReadFile("/etc/secrets/serviceAccountKey.json") ??
+    tryReadFile(join(__dirname, "serviceAccountKey.json"));
 
-  serviceAccount = JSON.parse(readFileSync(serviceAccountPath, "utf8"));
+if (!serviceAccount) {
+  console.error("❌ ERROR: No Firebase credentials found!");
+  console.error("   Set FIREBASE_SERVICE_ACCOUNT env var, or mount a Secret");
+  console.error("   File at /etc/secrets/serviceAccountKey.json, or place");
+  console.error("   serviceAccountKey.json in: " + __dirname);
+  process.exit(1);
 }
 
 initializeApp({
