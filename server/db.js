@@ -9,18 +9,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // ─── Load Firebase Service Account ──────────────────────────────────────────
-const serviceAccountPath = join(__dirname, "serviceAccountKey.json");
+// Local dev: serviceAccountKey.json file in this folder.
+// Production (Render etc.): FIREBASE_SERVICE_ACCOUNT env var containing the
+// full JSON (newlines of private_key must be escaped as \n).
+let serviceAccount;
 
-if (!existsSync(serviceAccountPath)) {
-  console.error("❌ ERROR: serviceAccountKey.json not found!");
-  console.error(
-    "   Download it from Firebase Console → Project Settings → Service Accounts"
-  );
-  console.error("   Then place it in: " + __dirname);
-  process.exit(1);
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+} else {
+  const serviceAccountPath = join(__dirname, "serviceAccountKey.json");
+
+  if (!existsSync(serviceAccountPath)) {
+    console.error("❌ ERROR: No Firebase credentials found!");
+    console.error(
+      "   Set FIREBASE_SERVICE_ACCOUNT env var (production) or place"
+    );
+    console.error("   serviceAccountKey.json in: " + __dirname);
+    process.exit(1);
+  }
+
+  serviceAccount = JSON.parse(readFileSync(serviceAccountPath, "utf8"));
 }
-
-const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, "utf8"));
 
 initializeApp({
   credential: cert(serviceAccount),
