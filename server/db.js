@@ -9,21 +9,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // ─── Load Firebase Service Account ──────────────────────────────────────────
-// Local dev: serviceAccountKey.json file in this folder.
-// Production (Render etc.): either
-//   - FIREBASE_SERVICE_ACCOUNT env var with the full JSON (private_key \n's
-//     escaped), or
-//   - a Secret File mounted at /etc/secrets/serviceAccountKey.json (Render)
-//     — byte-for-byte copy of the file, nothing gets mangled in transit.
-let serviceAccount;
-
+// Priority: FIREBASE_SERVICE_ACCOUNT env var → Render Secret File → local file.
 const tryReadFile = (p) =>
   existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null;
 
-serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT
-  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
-  : tryReadFile("/etc/secrets/serviceAccountKey.json") ??
-    tryReadFile(join(__dirname, "serviceAccountKey.json"));
+let serviceAccount;
+let credSource;
+
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  credSource = "FIREBASE_SERVICE_ACCOUNT env var";
+} else if (existsSync("/etc/secrets/serviceAccountKey.json")) {
+  serviceAccount = tryReadFile("/etc/secrets/serviceAccountKey.json");
+  credSource = "Render Secret File (/etc/secrets/serviceAccountKey.json)";
+} else if (existsSync(join(__dirname, "serviceAccountKey.json"))) {
+  serviceAccount = tryReadFile(join(__dirname, "serviceAccountKey.json"));
+  credSource = "local serviceAccountKey.json";
+}
 
 if (!serviceAccount) {
   console.error("❌ ERROR: No Firebase credentials found!");
@@ -32,6 +34,21 @@ if (!serviceAccount) {
   console.error("   serviceAccountKey.json in: " + __dirname);
   process.exit(1);
 }
+
+// Heal double-escaped newlines (happens when the JSON is pasted into a
+// dashboard field and \n survives as literal backslash-n).
+if (
+  typeof serviceAccount.private_key === "string" &&
+  serviceAccount.private_key.includes("\\n")
+) {
+  console.warn("⚠️ private_key contained literal \\n — healing automatically.");
+  serviceAccount.private_key = serviceAccount.private_key.replace(
+    /\\n/g,
+    "\n"
+  );
+}
+
+console.log(`🔑 Firebase credentials loaded from: ${credSource}`);
 
 initializeApp({
   credential: cert(serviceAccount),
